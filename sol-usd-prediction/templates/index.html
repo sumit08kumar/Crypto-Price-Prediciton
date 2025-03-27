@@ -1,0 +1,70 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto Price Predictor</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { margin: 5px; padding: 10px; }
+        #plot { max-width: 100%; }
+    </style>
+</head>
+<body>
+    <h1>Crypto Price Predictor</h1>
+    <button onclick="fetchData()">Fetch Data</button>
+    <button onclick="trainModel()">Train Model</button>
+    <button onclick="makePrediction()">Predict</button>
+    <button onclick="evaluateModel()">Evaluate</button>
+    <button onclick="saveModel()">Save Model</button>
+    <button onclick="loadModel()">Load Model</button>
+
+    <div id="output"></div>
+    <img id="plot" src="" alt="">
+
+    <script>
+        function fetchData() {
+            fetch('/fetch_data', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => document.getElementById('output').innerText = JSON.stringify(data, null, 2));
+        }
+
+        function trainModel() {
+            fetch('/train', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => document.getElementById('output').innerText = JSON.stringify(data, null, 2));
+        }
+
+        function makePrediction() {
+            fetch('/predict', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => document.getElementById('output').innerText = JSON.stringify(data, null, 2));
+        }
+
+        function evaluateModel() {
+            fetch('/evaluate')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('output').innerText = JSON.stringify({
+                        rmse: data.rmse,
+                        directional_accuracy: data.directional_accuracy,
+                        correlation_coefficient: data.correlation_coefficient
+                    }, null, 2);
+                    document.getElementById('plot').src = 'data:image/png;base64,' + data.plot;
+                });
+        }
+
+        function saveModel() {
+            fetch('/save_model', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => document.getElementById('output').innerText = JSON.stringify(data, null, 2));
+        }
+
+        function loadModel() {
+            fetch('/load_model', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => document.getElementById('output').innerText = JSON.stringify(data, null, 2));
+        }
+    </script>
+</body>
+</html>

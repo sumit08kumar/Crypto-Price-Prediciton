@@ -1,0 +1,13 @@
+# requirements.txt
+
+tiingo
+numpy
+pandas
+matplotlib
+scikit-learn
+xgboost
+optuna
+seaborn
+joblib
+flask
+requests
