@@ -1,7 +1,7 @@
 {
     "wallet": {
         "addressKeyName": "sumit-forage",
-        "addressRestoreMnemonic": "a1b56e719eb80e020ae1897d535860d86dd1df0f146b224fb4d67f1f8dcadf25",
+        "addressRestoreMnemonic",
       "alloraHomeDir": "",
       "chainId": "allora-testnet-1",
       "gasPrices": "auto",
